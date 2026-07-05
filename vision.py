@@ -112,11 +112,7 @@ while capturing:
             else:
                 state = "Squatting"
                 
-
-
-        
         print(f"Left Hip (ID 23) -> Y: {avg}\nState: {state}")
-
 
     #just for like output
     raw_rgb_view = image.numpy_view()
