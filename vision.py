@@ -4,7 +4,11 @@ import mediapipe as mp
 from mediapipe.tasks import python
 from mediapipe.tasks.python import vision
 import os
+import serial
+import time
 
+ser = serial.Serial('COM3', 115200)
+time.sleep(2)
 #person is 76in out, camera is 36in tall and 90degrees
 
 POSE_CONNECTIONS = [
@@ -54,13 +58,14 @@ calibration_ready = False
 calibrating_step = "Noone In Frame"
 state = "standing"
 capturing = True
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture(1)
 
 coordinates = (50, 80) 
 font = cv2.FONT_HERSHEY_SIMPLEX
 font_scale = 2
 color = (0, 255, 0)
 thickness = 3
+prevstate = state
 
 base_options = python.BaseOptions(model_asset_path='pose_landmarker_full.task')
 options = vision.PoseLandmarkerOptions(
@@ -111,11 +116,15 @@ while capturing:
                 state = "Standing"
             else:
                 state = "Squatting"
-                
-
 
         
-        print(f"Left Hip (ID 23) -> Y: {avg}\nState: {state}")
+        # print(f"Left Hip (ID 23) -> Y: {avg}\nState: {state}")
+
+    if (prevstate != state):
+        ser.write((state+"\n").encode('utf-8'))
+        print(state)
+        prevstate = state
+    print(ser.read_all().decode('utf-8'))
 
 
     #just for like output
