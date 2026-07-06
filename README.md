@@ -1,5 +1,9 @@
 # Dino Jump: Mechanical Dinosaur Game
 
+## Zine:
+
+![zine.png](assets/zine.png)
+
 ## Why?
 ### It's 2026, the world has just ended shortly following the Fallout Hackathon...
 Within weeks, Canned Wifi supplies have ran out. People have no choice but to the play the classic Chrome Dinosaur game that pops up without internet access.

@@ -6,11 +6,12 @@ from mediapipe.tasks.python import vision
 import os
 import serial
 import time
+import keyboard
 # weird solution for model transfe
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 MODEL_PATH = os.path.join(SCRIPT_DIR, 'pose_landmarker_full.task')
 
-ser = serial.Serial('/dev/cu.usbmodem101', 115200)
+ser = serial.Serial('COM3', 115200)
 time.sleep(2)
 #person is 76in out, camera is 36in tall and 90degrees
 
@@ -49,7 +50,7 @@ def draw_landmarks_on_image(rgb_image, detection_result):
 
 calibration_ready = False
 calibrating_step = "Noone In Frame"
-state = "standing"
+state = "Standing"
 capturing = True
 cap = cv2.VideoCapture(0)
 
@@ -111,6 +112,19 @@ while capturing:
                 state = "Squatting"
         
         # print(f"Left Hip (ID 23) -> Y: {avg}\nState: {state}")
+
+    if state == "Standing":
+        if keyboard.is_pressed('w'):
+            state = "Jumping"
+        if keyboard.is_pressed('s'):
+            state = "Squatting"
+    elif state == "Jumping":
+        if not keyboard.is_pressed('w'):
+            state = "Standing"
+    elif state == "Squatting":
+        if not keyboard.is_pressed('s'):
+            state = "Standing"
+
 
     if (prevstate != state):
         ser.write((state+"\n").encode('utf-8'))
