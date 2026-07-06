@@ -63,4 +63,14 @@ Also, the lack of stable wifi at the venue heavily inspired our idea.
   - Cut a circle roughly 10in. in diameter, it should be the same diameter as the octagon
   - Mount the motor and mount using zipties and M3 screws
   - Follow the wiring diagram (wire before final assembly)
-  - Mount the circle and octagon with hot glue 
+  - Mount the circle and octagon with hot glue
+
+## Software
+- Flash corresponding sketches to each ESP32 S3 using Arduino IDE
+- If you do not get a serial output/input, try changing the USB CDC setting
+
+## Usage
+- Power the Base by plugging in the wall connector
+- Start vision.py and follow on screen cailbration
+- Position the 0 servo next to the limit switch bump
+- Power the Carousel by turning on the battery
