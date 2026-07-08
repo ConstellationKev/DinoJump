@@ -6,31 +6,11 @@ from mediapipe.tasks.python import vision
 import os
 import serial
 import time
-from pynput import keyboard
-
-keys_pressed = set()
-
-def on_press(key):
-    global keys_pressed
-    try:
-        # Convert character keys to lowercase strings ('w', 's')
-        keys_pressed.add(key.char.lower())
-    except AttributeError:
-        # Handle special keys if needed (e.g., keyboard.Key.space)
-        pass
-
-def on_release(key):
-    global keys_pressed
-    try:
-        keys_pressed.discard(key.char.lower())
-    except AttributeError:
-        pass
-
 # weird solution for model transfe
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 MODEL_PATH = os.path.join(SCRIPT_DIR, 'pose_landmarker_full.task')
 
-ser = serial.Serial('/dev/cu.usbmodem101', 115200)
+ser = serial.Serial('COM3', 115200)
 time.sleep(2)
 #person is 76in out, camera is 36in tall and 90degrees
 
@@ -134,23 +114,6 @@ while capturing:
                 state = "Squatting"
         
         # print(f"Left Hip (ID 23) -> Y: {avg}\nState: {state}")
-
-    # if listener.running:
-    #     w_is_pressed = 'w' in keys_pressed 
-    #     s_is_pressed = 's' in keys_pressed 
-        
-    #     if state == "Standing": 
-    #         if w_is_pressed: 
-    #             state = "Jumping" 
-    #         elif s_is_pressed: 
-    #             state = "Squatting" 
-    #     elif state == "Jumping": 
-    #         if not w_is_pressed: 
-    #             state = "Standing" 
-    #     elif state == "Squatting": 
-    #         if not s_is_pressed: 
-    #             state = "Standing" 
-        
 
     if (prevstate != state):
         ser.write((state+"\n").encode('utf-8'))
