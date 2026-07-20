@@ -2,10 +2,10 @@
 See our demo video [here](https://youtu.be/Z2IjySYvM9o?si=r-w-ZcUsuN7d3cY8)
 
 # Event Photos
-![](assets/MG_4705.JPG)
-![](assets/MG_4707.JPG)
-![](assets/MG_4709.JPG)
-![](assets/MG_4710.JPG)
+![](assets/MG_4705.jpg)
+![](assets/MG_4707.jpg)
+![](assets/MG_4709.jpg)
+![](assets/MG_4710.jpg)
 
 ## Zine:
 
